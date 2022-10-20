@@ -13,17 +13,17 @@ jobs:
       - name: Update binaries
         run: |
           $ErrorActionPreference = 'SilentlyContinue'
-          git clone --recursive https://github.com/uNetworking/uWebSockets.js.git
+          git clone --recursive https://github.com/shaharmor/uWebSockets.js.git
           cd uWebSockets.js
           nmake
           git fetch origin binaries:binaries
           git checkout binaries
           xcopy /Y dist\*.node .
           git status
-          git config --global user.email "alexhultman@gmail.com"
-          git config --global user.name "Alex Hultman"
+          git config --global user.email "shaharmor1@gmail.com"
+          git config --global user.name "Shahar Mor"
           git commit -a -m "[GitHub Actions] Updated windows-latest binaries"
-          git push "https://unetworkingab:${{ secrets.SECRET }}@github.com/uNetworking/uWebSockets.js" binaries
+          git push "https://shaharmor:${{ secrets.SECRET }}@github.com/shaharmor/uWebSockets.js" binaries
 
   build-unix:
     runs-on: ${{ matrix.os }}
@@ -36,7 +36,7 @@ jobs:
           sudo xcode-select -switch /Applications/Xcode_12.2.app || true
           sudo apt update || true
           sudo apt install -y g++-aarch64-linux-gnu || true
-          git clone --recursive https://github.com/uNetworking/uWebSockets.js.git
+          git clone --recursive https://github.com/shaharmor/uWebSockets.js.git
           cd uWebSockets.js
           make
           git fetch origin binaries:binaries
@@ -45,7 +45,7 @@ jobs:
           git status
           git rev-parse master > source_commit
           git checkout master docs/index.d.ts && mv docs/index.d.ts .
-          git config --global user.email "alexhultman@gmail.com"
-          git config --global user.name "Alex Hultman"
+          git config --global user.email "shaharmor1@gmail.com"
+          git config --global user.name "Shahar Mor"
           git commit -a -m "[GitHub Actions] Updated ${{ matrix.os }} binaries" || true
-          git push "https://unetworkingab:${{ secrets.SECRET }}@github.com/uNetworking/uWebSockets.js" binaries
+          git push "https://shaharmor:${{ secrets.SECRET }}@github.com/shaharmor/uWebSockets.js" binaries
